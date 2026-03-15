@@ -2,6 +2,7 @@ use goblin::{Object, error};
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::process::exit;
 
 fn goblin_runner(file_path: &PathBuf) -> Result<(), Box<dyn std::error::Error + 'static>> {
     let file_data = fs::read(file_path)?;
@@ -14,6 +15,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     if !args.len() > 1 {
         println!("No command-line arguments provided (except the executable path).");
+        exit(0)
     }
 
     let mut file = String::from("");

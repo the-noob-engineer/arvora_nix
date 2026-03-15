@@ -5,7 +5,7 @@ and how you could implement the basic pieces in Rust.
 
 ---
 
-## 📝 Overview
+## Overview
 
 A Windows `.exe` is a **Portable Executable (PE)** file. It expects Windows services (`kernel32.dll`, `user32.dll`, etc.) and calls Windows APIs.
 A compatibility layer must:
@@ -17,7 +17,7 @@ A compatibility layer must:
 
 ---
 
-## 🛠️ Steps to Intercept and Run `.exe` Files
+## Steps to Intercept and Run `.exe` Files
 
 ### 1. Parse the PE
 Use a crate like [`goblin`](https://docs.rs/goblin) or `pelite` to parse the `.exe`.
@@ -153,7 +153,7 @@ unsafe fn call_entry(image_base: *mut u8, pe: &PE) -> i32 {
 }
 ```
 
-🚧 Challenges
+## Challenges
 
 - Relocations: Handle base relocation table if image not loaded at preferred base.
 - TLS & SEH: Thread Local Storage and Structured Exception Handling must be emulated.
@@ -166,7 +166,7 @@ unsafe fn call_entry(image_base: *mut u8, pe: &PE) -> i32 {
   - Networking → sockets.
   - Graphics → DirectX → Vulkan (DXVK or your own translator).
 
-## 🧪 Practical Plan
+## Practical Plan
 1. Run a minimal PE (no imports).
 2. Implement ExitProcess, GetLastError, CreateFileA.
 3. Add IAT patching + logging for missing functions.
